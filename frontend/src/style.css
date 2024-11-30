@@ -1,0 +1,230 @@
+/* @import url('https://fonts.cdnfonts.com/css/gilroy-bold'); */
+@font-face {
+    font-family: "GilroyLight"; 
+    src: url("./assets/fonts/Gilroy-SemiBold.ttf") format("truetype"); 
+    font-style: normal; 
+    font-weight: normal; 
+} 
+
+html {
+    background-color: transparent;
+    text-align: center;
+    color: white;
+    
+}
+
+* {
+    font-family: 'GilroyLight', sans-serif;
+}
+
+.background-logo {
+    width: 360px;
+    height: 433px;
+    margin-top: 0px;
+    margin-left: 0px;
+    position: absolute;
+}
+
+body {
+    margin: 0;
+    color: white;
+    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+#app {
+    width: 340px;
+    height: 380px;
+    text-align: center;
+}
+
+.container {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    background-image: url('./assets/images/arizona.png');
+    background-color: #212121;   
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-blend-mode: overlay;
+}
+
+.background-logo {
+    top: 0px;
+    position: absolute;
+    left: 0px;
+    width: 330px;
+    height: 400px;
+    opacity: 50%;
+}
+
+.button-play {
+    margin-top: 10px;
+    width: 100%;
+    height: 30px;
+    background-color: rgba(0.09, 0.09, 0.09, 0.5);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border-style: none;
+    transition: all ease-in 100ms;
+}
+
+input[type="text"], input[type="number"] {
+    background-color: rgba(0.09, 0.09, 0.09, 0.5);;
+    color: white;
+    border-style: none;
+    border-radius: 5px;
+    height: 30px;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    margin-left: 210px;
+    border-radius: 5px;
+    background-color: red;
+    
+}
+
+
+button {
+    border-radius: 5px;
+    border-style: none;
+    height: 30px;
+    background-color: #181818;
+    color: white;
+}
+
+dialog {
+    background-color: #212121;
+    user-select: none;
+    scrollbar-width: thin; /* Для Firefox */
+    scrollbar-color: #313131 #181818; /* Цвет ползунка и фона */
+    scrollbar-arrow-color: transparent;
+    width: 100%;
+    height: 100%;
+    border-style: none;
+}
+
+.settings-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+
+.settings-checkboxes {
+    display: flex;
+    flex-direction: column; /* Расположение элементов в колонку */
+}
+
+.checkbox-item {
+    display: flex; /* Используем flex для выравнивания label и checkbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    margin-bottom: 8px; /* Отступ между строками */
+}
+
+
+.button-play:hover {
+    background-color: rgba(0.09, 0.09, 0.09, 0.25);
+}
+
+.button-settings {
+    height: 30px;
+    width: 30px;
+    /* background-color: rgba(0.09, 0.09, 0.09, 0.5); */
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.button-settings-logo {
+    padding: 5px;
+    /* background-color: #181818; */
+    border-radius: 5px;
+    width: 20px;
+    transition: transform 0.7s ease;
+}
+
+.button-settings-logo:hover {
+    transform: rotate(180deg);
+}
+
+.bottom {
+    /* margin-bottom: 0px; */
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border-style: none;
+    gap: 10px;
+}
+
+.servers {
+    z-index: 2;
+    overflow-y: auto;
+    background-color: rgba(0.09, 0.09, 0.09, 0.5);
+    border-radius: 5px;
+    width: 100%;
+    height: 300px;
+    user-select: none;
+    scrollbar-width: thin; /* Для Firefox */
+    scrollbar-color: #313131 #181818; /* Цвет ползунка и фона */
+    scrollbar-arrow-color: transparent;
+}
+
+.server-selected {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+    /* font-weight: bold; */
+    border-radius: 5px;
+    transition: all ease-in 0.3s;
+    
+}
+
+.server-logo {
+    width: 32px;
+    height: 32px;
+}
+
+.server {
+    /* background-color: purple; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+}
+
+.server-players {
+    text-align: right;
+}
+
+.input-name {
+    height: 25px;
+    width: 100%;
+    border-radius: 5px;
+    border-style: none;
+    background-color: rgba(0.09, 0.09, 0.09, 0.5);
+    color: white;
+    outline: none;
+}
+
+.settings-checkboxes input {
+    height: 25px;
+    /* background-color: red; */
+}
+
+#memory {
+    width: 50px;
+    margin-left: 15px;
+}
+
+input {
+    outline: none;
+}
+

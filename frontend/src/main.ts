@@ -22,7 +22,7 @@ type Server = {
 	plotPoints:           {online: number, time: number}[]
 }
 
-var serversList: Server[];
+var serversList: Server[] = [];
 
 function createServer(server: Server, id: number, isSelected = false) {
     const list = document.getElementById('servers-list');
@@ -64,6 +64,10 @@ function createServer(server: Server, id: number, isSelected = false) {
 addEventListener('DOMContentLoaded', () => {
     loadConfig();
     EventsEmit('servers:request');
+    setInterval(() => {
+        console.log('Requesting servers update...');
+        EventsEmit('servers:request');
+    }, 10000);
     document.querySelectorAll('input[type=checkbox]').forEach((el) => el.addEventListener('click', () => {
         //@ts-ignore
         config.params[el.id] = el.checked
@@ -108,6 +112,8 @@ EventsOn('settings:fileDialogPathSelected', (path: string) => {
 });
 
 EventsOn('servers:update', (servers: Server[]) => {
+    console.log('servers:update');
+    const scrollAfterCreation = serversList.length == 0;
     serversList = servers;
     // alert(servers);
     servers.sort((a, b) => a.number - b.number).forEach((server) => {
@@ -115,11 +121,5 @@ EventsOn('servers:update', (servers: Server[]) => {
         createServer(server, server.number, config.selectedServer == server.number);
     });
     //@ts-ignore
-    document.getElementById('servers-list').scrollTop = (config.selectedServer - 1) * 42
+    if (scrollAfterCreation) document.getElementById('servers-list').scrollTop = (config.selectedServer - 1) * 42
 });
-
-declare global {
-    interface Window {
-        startGame: () => void;
-    }
-}

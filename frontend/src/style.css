@@ -100,8 +100,8 @@ button {
 dialog {
     background-color: #212121;
     user-select: none;
-    scrollbar-width: thin; /* Для Firefox */
-    scrollbar-color: #313131 #181818; /* Цвет ползунка и фона */
+    scrollbar-width: thin;
+    scrollbar-color: #313131 #181818;
     scrollbar-arrow-color: transparent;
     width: 100%;
     height: 100%;
@@ -119,13 +119,13 @@ dialog {
 
 .settings-checkboxes {
     display: flex;
-    flex-direction: column; /* Расположение элементов в колонку */
+    flex-direction: column;
 }
 
 .checkbox-item {
-    display: flex; /* Используем flex для выравнивания label и checkbox */
-    align-items: center; /* Выравнивание по центру по вертикали */
-    margin-bottom: 8px; /* Отступ между строками */
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
 
@@ -193,7 +193,6 @@ dialog {
 }
 
 .server {
-    /* background-color: purple; */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -201,7 +200,8 @@ dialog {
 }
 
 .server-players {
-    text-align: right;
+    color: gray;
+    margin-left: auto;
 }
 
 .input-name {

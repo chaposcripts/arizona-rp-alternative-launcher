@@ -30,6 +30,7 @@ type Config struct {
 	Params         ConfigParam `json:"params"`
 }
 
+/*
 var defaultConfig Config = Config{
 	Name:           "",
 	Path:           "",
@@ -50,3 +51,4 @@ var defaultConfig Config = Config{
 		HdrResolution: false,
 	},
 }
+*/

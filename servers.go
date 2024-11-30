@@ -7,8 +7,6 @@ import (
 	"sort"
 )
 
-var serverList []Server
-
 type ServerPlotPoint struct {
 	Online int `json:"online"`
 	Time   int `json:"time"`
@@ -53,24 +51,10 @@ func LoadServers() (ArizonaServerInfo, error) {
 			err = json.Unmarshal(bytes, &servers)
 			if err == nil {
 				sort.Slice(servers.Arizona, func(a, b int) bool {
-					// fmt.Printf("SORTING %d %d %s, %d %d %s \n", a, servers.Arizona[a].Number, servers.Arizona[a].Name,)
 					return servers.Arizona[a].Number < servers.Arizona[b].Number
 				})
 			}
 		}
 	}
-	serverList = servers.Arizona
 	return servers, err
 }
-
-// type Settings struct {
-// 	Name   string
-// 	Path   string
-// 	Memory int
-// }
-
-// func BuildCommandLine(settings Settings, server Server, settingsStr string) (string, error) {
-// 	var err error
-// 	var line string = fmt.Sprintf(`start /d "%s" gta_sa.exe -c -h %s -p %d -n %s -mem %d -x %s`, settings.Path, server.IP, server.Port, settings.Name, settings.Memory, settingsStr)
-// 	return line, err
-// }

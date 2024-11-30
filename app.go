@@ -3,41 +3,22 @@ package main
 import (
 	"context"
 	"fmt"
+	runtime "github.com/wailsapp/wails/v2/pkg/runtime"
 	"os"
 	"os/exec"
 	"strings"
-
-	// front "github.com/wailsapp/wails/v2/internal/frontend"
-	runtime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-// App struct
 type App struct {
 	ctx context.Context
 }
 
-// NewApp creates a new App application struct
 func NewApp() *App {
 	return &App{}
 }
 
-// startup is called when the app starts. The context is saved
-// so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
-	runtime.EventsOn(ctx, "game:start", func(args ...interface{}) {
-		fmt.Printf("[EVENT] game:start, args: %v\n", args)
-
-		// Проверяем, является ли первый аргумент срезом строк
-		if strSlice, ok := args[0].([]string); ok {
-			// Успешно привели к []string
-			fmt.Println("Successfully converted:", strSlice)
-		} else {
-			// Приведение не удалось
-			fmt.Println("Conversion failed")
-		}
-	})
-
 	runtime.EventsOn(ctx, "servers:request", func(args ...interface{}) {
 		go func() {
 			servers, err := LoadServers()
@@ -50,16 +31,6 @@ func (a *App) startup(ctx context.Context) {
 				return
 			}
 			runtime.EventsEmit(ctx, "servers:update", servers.Arizona)
-		}()
-	})
-
-	// Config
-	runtime.EventsOn(ctx, "config:write", func(args ...interface{}) {
-
-	})
-	runtime.EventsOn(ctx, "config:request", func(args ...interface{}) {
-		go func() {
-
 		}()
 	})
 
@@ -99,7 +70,6 @@ func (a *App) StartGame(name string, gamePath string, parameters []string) error
 		})
 		return nil
 	}
-	// var gamePath string = fmt.Sprintf("%s\\gta_sa.exe", gamePath)
 	var batFile = fmt.Sprintf("%s\\%s", gamePath, "alternative-launcher.bat")
 	var batText = fmt.Sprintf("@echo off\ncd /D %%~dp0\nstart gta_sa.exe %s\nexit", strings.Join(parameters, " "))
 
@@ -113,7 +83,6 @@ func (a *App) StartGame(name string, gamePath string, parameters []string) error
 		return err
 	}
 	cmd := exec.Command(batFile).Run()
-	// proc, err := os.StartProcess(batFile, []string{}, &os.ProcAttr{})
 	fmt.Println(cmd)
 	return nil
 }

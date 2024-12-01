@@ -5,3 +5,8 @@
 1. Donwload [latest release](https://github.com/chaposcripts/arizona-rp-alternative-launcher/releases)
 2. Unzip `Alternative Launcher.exe`
 3. Run `Alternative Launcher.exe`
+
+## Building
+1. `git clone https://github.com/chaposcripts/arizona-rp-alternative-launcher`  
+2. `cd arizona-rp-alternative-launcher`  
+3. `wails build`

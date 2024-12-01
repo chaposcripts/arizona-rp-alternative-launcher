@@ -1,12 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
-
-var CONFIG_FILE_PATH = fmt.Sprintf("%s\\alt-launcher-config.json", os.TempDir())
-
 type ConfigParam struct {
 	WideScreen    bool `json:"wideScreen"`
 	AutoLogin     bool `json:"autoLogin"`

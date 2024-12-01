@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"os/user"
 	"strings"
 
 	runtime "github.com/wailsapp/wails/v2/pkg/runtime"
@@ -18,8 +19,21 @@ func NewApp() *App {
 	return &App{}
 }
 
+var CONFIG_FILE_PATH string
+
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+	winUser, err := user.Current()
+	if err == nil {
+		CONFIG_FILE_PATH = winUser.HomeDir + "\\Documents\\alt-launcher-config.json"
+	} else {
+		runtime.MessageDialog(ctx, runtime.MessageDialogOptions{
+			Title:   "Ошибка",
+			Message: "Ошибка получения папки с настройками:\n" + err.Error(),
+			Type:    runtime.ErrorDialog,
+		})
+	}
+	//fmt.Sprintf("%s\\alt-launcher-config.json", os.Use())
 	runtime.EventsOn(ctx, "servers:request", func(args ...interface{}) {
 		go func() {
 			servers, err := LoadServers()
@@ -73,7 +87,7 @@ func (a *App) StartGame(name string, gamePath string, parameters []string) error
 	}
 	var batFile = fmt.Sprintf("%s\\%s", gamePath, "alternative-launcher.bat")
 	var batText = fmt.Sprintf("@echo off\ncd /D %%~dp0\nstart gta_sa.exe %s\nexit", strings.Join(parameters, " "))
-
+	fmt.Println("[CREATING BAT]:", batText)
 	err := os.WriteFile(batFile, []byte(batText), 0644)
 	if err != nil {
 		runtime.MessageDialog(a.ctx, runtime.MessageDialogOptions{

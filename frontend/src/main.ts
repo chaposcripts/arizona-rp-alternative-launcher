@@ -90,7 +90,7 @@ addEventListener('DOMContentLoaded', () => {
             `-h ${selectedServer.ip}`,
             `-p ${selectedServer.port}`,
             `-n ${config.name}`,
-            `-mem ${config.memory ?? '2048'}`,
+            `-mem ${config.memory.toString().length > 0 ? config.memory : '2048'}`,
             '-referrer',
             '-userId undefined'
         ];

@@ -24,7 +24,7 @@ type Server = {
 
 var serversList: Server[] = [];
 
-function createServer(server: Server, id: number, isSelected = false) {
+function createServer(server: Server, id: number, isSelected = false, hideNumber = false) {
     const list = document.getElementById('servers-list');
     const serverDiv = document.createElement('div');
     serverDiv.classList.add('server');
@@ -42,6 +42,7 @@ function createServer(server: Server, id: number, isSelected = false) {
     serverLogo.classList.add('server-logo')
     serverLogo.src = server.icon;
 
+   
     const serverId = document.createElement('a');
     serverId.classList.add('server-id');
     serverId.textContent = `#${server.number}`;
@@ -55,7 +56,8 @@ function createServer(server: Server, id: number, isSelected = false) {
     serverPlayers.textContent = `${server.online}/${server.maxplayers}`;
     
     serverDiv.appendChild(serverLogo);
-    serverDiv.appendChild(serverId);
+    if (!hideNumber)
+        serverDiv.appendChild(serverId);
     serverDiv.appendChild(serverName);
     serverDiv.appendChild(serverPlayers);
     list?.appendChild(serverDiv);
@@ -111,14 +113,20 @@ EventsOn('settings:fileDialogPathSelected', (path: string) => {
     document.getElementById('path').value = path;
 });
 
-EventsOn('servers:update', (servers: Server[]) => {
+EventsOn('servers:update', (servers: Server[], mobileServers: Server[]) => {
     console.log('servers:update');
     const scrollAfterCreation = serversList.length == 0;
+
+    mobileServers.sort((a, b) => a.name.length - b.name.length).forEach((ms) => {
+        ms.number += servers.length;
+        servers.push(ms)
+    });
+
     serversList = servers;
     // alert(servers);
     servers.sort((a, b) => a.number - b.number).forEach((server) => {
         document.getElementById(server.number.toString())?.remove();
-        createServer(server, server.number, config.selectedServer == server.number);
+        createServer(server, server.number, config.selectedServer == server.number, server.number > servers.length - mobileServers.length);
     });
     //@ts-ignore
     if (scrollAfterCreation) document.getElementById('servers-list').scrollTop = (config.selectedServer - 1) * 42

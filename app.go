@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	runtime "github.com/wailsapp/wails/v2/pkg/runtime"
 	"os"
 	"os/exec"
 	"strings"
+
+	runtime "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 type App struct {
@@ -30,7 +31,7 @@ func (a *App) startup(ctx context.Context) {
 				})
 				return
 			}
-			runtime.EventsEmit(ctx, "servers:update", servers.Arizona)
+			runtime.EventsEmit(ctx, "servers:update", servers.Arizona, servers.ArizonaMobile)
 		}()
 	})
 

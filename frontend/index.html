@@ -28,8 +28,12 @@
                     <div class="settings-checkboxes">
                         <input class="input-name" type="text" readonly placeholder="Нажмите что бы указать папку" id="path">
                         <div class="checkbox-item">
-                            <label for="wideScreen">ОЗУ</label>
+                            <label for="memory">ОЗУ</label>
                             <input id="memory" type="number" placeholder="4096">
+                        </div>
+                        <div class="checkbox-item">
+                            <label for="pass">Пароль</label>
+                            <input id="pass" type="text" placeholder="Необязательно">
                         </div>
                         <div class="checkbox-item">
                             <label for="wideScreen">Широкий экран</label>
@@ -61,11 +65,11 @@
                         </div>
                         <div class="checkbox-item">
                             <label for="cefDirtyRects">Старые разрешения</label>
-                            <input type="checkbox" id="cefDirtyRects">
+                            <input type="checkbox" id="oldResolution">
                         </div>
                         <div class="checkbox-item">
                             <label for="authCef">Поддержка HDR</label>
-                            <input type="checkbox" id="authCef">
+                            <input type="checkbox" id="hdrResolution">
                         </div>
                         <div class="checkbox-item">
                             <label for="grass">Растительность</label>
@@ -73,11 +77,11 @@
                         </div>
                         <div class="checkbox-item">
                             <label for="oldResolution">Новая авторизация</label>
-                            <input type="checkbox" id="oldResolution">
+                            <input type="checkbox" id="authCef">
                         </div>
                         <div class="checkbox-item">
                             <label for="hdrResolution">Оптимизация интерфейсов</label>
-                            <input type="checkbox" id="hdrResolution">
+                            <input type="checkbox" id="cefDirtyRects">
                         </div>
                     </div>
                 </div>

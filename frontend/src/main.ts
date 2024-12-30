@@ -2,7 +2,7 @@ import './style.css';
 import './app.css';
 import { EventsOn, EventsEmit } from '../wailsjs/runtime'
 import { config, loadConfig, saveConfig, parameterName } from './config';
-import { StartGame } from '../wailsjs/go/main/App';
+import { StartGame, UpdateServerInfo } from '../wailsjs/go/main/App';
 
 type Server = {
     number:               number,
@@ -35,6 +35,7 @@ function createServer(server: Server, id: number, isSelected = false, hideNumber
             el.classList.remove('server-selected');
         });
         serverDiv.classList.add('server-selected');
+        UpdateServerInfo(server.ip);
         config.selectedServer = server.number;
         saveConfig();
     };
@@ -52,6 +53,7 @@ function createServer(server: Server, id: number, isSelected = false, hideNumber
     serverName.textContent = server.name;
 
     const serverPlayers = document.createElement('a');
+    serverPlayers.id = `players-count-${server.number}`
     serverPlayers.classList.add('server-players');
     serverPlayers.textContent = `${server.online}/${server.maxplayers}`;
     
@@ -92,7 +94,8 @@ addEventListener('DOMContentLoaded', () => {
             `-n ${config.name}`,
             `-mem ${config.memory.toString().length > 0 ? config.memory : '2048'}`,
             '-referrer',
-            '-userId undefined'
+            '-userId undefined',
+            config.pass.length > 0 ? `-z ${config.pass}` : '',
         ];
         for (const [param, value] of Object.entries(config.params)) {
             if (value) params.push(`-${parameterName[param] ?? "-UNKNOWN_" + param}`);
@@ -131,3 +134,12 @@ EventsOn('servers:update', (servers: Server[], mobileServers: Server[]) => {
     //@ts-ignore
     if (scrollAfterCreation) document.getElementById('servers-list').scrollTop = (config.selectedServer - 1) * 42
 });
+
+EventsOn('server:update_players', (host: string, players: number, maxplayers: number) => {
+    const server = serversList.find((s) => s.ip == host);
+    if (server) {
+        const playersCount = document.getElementById(`players-count-${server.number}`);
+        if (playersCount) playersCount.textContent = `${players}/${maxplayers}`;
+    }
+    console.log('server:update_players', host, players, maxplayers);
+})

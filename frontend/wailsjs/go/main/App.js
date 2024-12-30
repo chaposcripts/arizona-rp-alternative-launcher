@@ -13,3 +13,7 @@ export function SaveConfig(arg1) {
 export function StartGame(arg1, arg2, arg3) {
   return window['go']['main']['App']['StartGame'](arg1, arg2, arg3);
 }
+
+export function UpdateServerInfo(arg1) {
+  return window['go']['main']['App']['UpdateServerInfo'](arg1);
+}

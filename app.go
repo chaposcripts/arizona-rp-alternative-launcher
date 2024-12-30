@@ -26,6 +26,7 @@ func (a *App) startup(ctx context.Context) {
 	winUser, err := user.Current()
 	if err == nil {
 		CONFIG_FILE_PATH = winUser.HomeDir + "\\Documents\\alt-launcher-config.json"
+		fmt.Println("CONFIG_FILE_PATH=", CONFIG_FILE_PATH)
 	} else {
 		runtime.MessageDialog(ctx, runtime.MessageDialogOptions{
 			Title:   "Ошибка",
@@ -124,5 +125,12 @@ func (a *App) SaveConfig(json string) {
 			Message: "Ошибка при сохранении настроек: " + err.Error(),
 			Type:    runtime.ErrorDialog,
 		})
+	}
+}
+
+func (a *App) UpdateServerInfo(host string) {
+	server, err := getServerQueryInfo(host, 7777)
+	if err == nil {
+		runtime.EventsEmit(a.ctx, "server:update_players", host, server.Players, server.MaxPlayers)
 	}
 }

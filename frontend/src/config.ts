@@ -4,6 +4,7 @@ export type Config = {
     path: string,
     memory: number,
     selectedServer: number,
+    pass: string,
     params: {
         wideScreen:    boolean,
         autoLogin:     boolean,
@@ -25,6 +26,7 @@ export var config: Config = {
     path: '',
     memory: 4096,
     selectedServer: 1,
+    pass: '',
     params: {
         wideScreen:    false,
         autoLogin:     false,
@@ -66,6 +68,8 @@ export function loadConfig() {
         document.getElementById('memory').value = config.memory;
         // @ts-ignore
         document.getElementById('path').value = config.path;
+        // @ts-ignore
+        document.getElementById('pass').value = config.pass ?? '';
 
         // @ts-ignore
         for (const [k, v] of Object.entries(config.params)) document.getElementById(k).checked = v;
@@ -79,6 +83,8 @@ export function saveConfig() {
     config.memory = document.getElementById('memory').value;
     // @ts-ignore
     config.path = document.getElementById('path').value;
+    // @ts-ignore
+    config.pass = document.getElementById('pass').value;
 
     
     for (const name of Object.keys(parameterName)) {
